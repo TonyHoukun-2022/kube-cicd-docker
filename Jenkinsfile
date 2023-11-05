@@ -68,7 +68,7 @@ pipeline {
                    -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                 }
 
-                timeout(time: 10, unit: 'MINUTES') {
+                timeout(time: 2, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
@@ -93,7 +93,7 @@ pipeline {
             }
         }
 
-        stage('Remove unused image') {
+        stage('Remove unused image on jenkins server') {
             steps {
                 sh "docker rmi $registry:V$BUILD_NUMBER"
             }
